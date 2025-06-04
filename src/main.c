@@ -48,11 +48,12 @@ int main(int argc, char *argv[]) {
 		/*          Compile!            */
 		/********************************/
 		program_t *result = compile_program(55);
-		char *out_program = "program.out";
+		char *out_program = "program.s";
 		if (argc >= 3) {
 			out_program = argv[2];
 		}
 		write_program(result, out_program);
+		printf("Successfully compiled %s to %s\n", argv[1], out_program);
 	}
 	return 0;
 }
