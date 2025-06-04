@@ -1,4 +1,4 @@
-# shrimpCC -- the tiny C compiler
+# shrimpCC — the tiny C compiler
 Based off the white paper [An Increment Approach to Compiler Construction](http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf).
 
 Source Language: C
