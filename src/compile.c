@@ -11,6 +11,10 @@ void print_function_headers(FILE *stream, char *func_name) {
 	fprintf(stream, "%s:\n", func_name);
 }
 
+void print_footers(FILE *stream) {
+	fprintf(stream, ".section	.note.GNU-stack\n");
+}
+
 program_t *compile_program(int x) {
 	program_t *program = malloc(sizeof(program_t));
 	program->stream = open_memstream(&program->buf, &program->len);
@@ -22,6 +26,7 @@ program_t *compile_program(int x) {
 	fprintf(program->stream, "	movl $%d, %%eax\n", x);
 	fprintf(program->stream, "	ret\n");
 	// clean up
+	print_footers(program->stream);
 	return program;
 }
 
