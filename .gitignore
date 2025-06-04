@@ -1,4 +1,8 @@
+# Generated Code
 *.o
 *.out
-*.exe
 *.s
+
+# Executables
+shrimpCC
+*.exe

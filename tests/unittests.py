@@ -16,15 +16,15 @@ class TestBasic(unittest.TestCase):
     # for the time being...
     def test_0_return(self):
         # Step 1: Compile the input code
-        command = [f"./{COMPILER}", "tests/0_return/0_basic.in", "tests/0_return/0_basic.s"]
+        command = [f"./{COMPILER}", "tests/0_return/test.in", "tests/0_return/test.s"]
         output = subprocess.run(command, stdout=sys.stdout, stderr=sys.stderr)
         # Step 2: link the input code
-        command = [f"gcc", "tests/0_return/0_test.c", "tests/0_return/0_basic.s", "-o", "tests/0_return/0_basic.exe"]
+        command = [f"gcc", "tests/0_return/test.c", "tests/0_return/test.s", "-o", "tests/0_return/test.exe"]
         output = subprocess.run(command, stdout=sys.stdout, stderr=sys.stderr)
         # Step 3: assert equality of the output
-        command = ["tests/0_return/0_basic.exe"]
+        command = ["tests/0_return/test.exe"]
         output = subprocess.run(command, stdout=sys.stdout, stderr=sys.stderr)
-        self.assertTrue(filecmp.cmp("tests/0_return/0_basic.ref", "tests/0_return/0_basic.out"))
+        self.assertTrue(filecmp.cmp("tests/0_return/test.ref", "tests/0_return/test.out"))
 
 if __name__ == '__main__':
     if not os.path.isfile(COMPILER):
