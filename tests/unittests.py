@@ -4,7 +4,7 @@ import subprocess
 import sys
 import unittest
 
-COMPILER = "main.out"
+COMPILER = "shrimpCC"
 
 test_dirs = (
     "0_return"

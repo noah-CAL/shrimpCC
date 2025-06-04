@@ -8,7 +8,7 @@ TESTS_OBJ := $(wildcard tests/*/*.s)
 TESTS_OUT := $(wildcard tests/*/*.out)
 TESTS_EXE := $(wildcard tests/*/*.exe)
 
-EXE := main.out
+EXE := shrimpCC
 
 help:
 	@echo "USAGE: make [all, clean, help]"
