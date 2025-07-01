@@ -19,7 +19,7 @@ CFLAGS = -g -ggdb -Wall -Wextra
 
 SOURCES := $(wildcard src/*.c)
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES)) # pattern, replacement, text
-DEPENDS := $(patsubst %.c,%.h,$(SOURCES))
+DEPENDS := $(patsubst src/%.c,include/%.h,$(SOURCES))
 TESTS_OBJ := $(wildcard tests/*/*.s)
 TESTS_OUT := $(wildcard tests/*/*.out)
 TESTS_EXE := $(wildcard tests/*/*.exe)
@@ -27,21 +27,18 @@ TESTS_EXE := $(wildcard tests/*/*.exe)
 EXE := shrimpCC
 
 help:
-	@echo "USAGE: make [all, clean, help]"
+	@echo "USAGE: make [all, test, clean, help]"
 	@echo
 
 all: $(OBJECTS)
 	$(CC) $^ -o $(EXE) $(CFLAGS)
 
-run:
-	@./$(EXE)
-
-run-unit: $(OBJECTS)
-	@python3 tests/unittests.py
-
-%.o: %.c %.h Makefile
+%.o: %.c include/%.h
 	$(CC) -c $< -o $@ $(CFLAGS)
 
-.PHONY: all clean run
+test: $(OBJECTS)
+	@python3 tests/unittests.py
+
+.PHONY: all clean help test
 clean:
 	rm -rf $(OBJECTS) $(EXE) $(TESTS_OBJ) $(TESTS_OUT) $(TESTS_EXE)

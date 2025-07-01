@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "src/compile.h"
+#include "include/compile.h"
 
 #include <stdio.h>
 #include <stdlib.h>

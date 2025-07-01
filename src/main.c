@@ -20,8 +20,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "src/compile.h"
-#include "src/errors.h"
+#include "include/compile.h"
+#include "include/errors.h"
 
 int main(int argc, char *argv[]) {
   /********************************/

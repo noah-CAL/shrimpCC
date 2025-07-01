@@ -19,6 +19,7 @@
 #ifndef __COMPILE_H
 #define __COMPILE_H
 #include <stddef.h>
+#include <stdio.h>
 
 /** A stream for the output program
 	* where LEN is the total number of
