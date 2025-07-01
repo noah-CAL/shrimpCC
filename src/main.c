@@ -22,6 +22,8 @@
 
 #include "include/compile.h"
 #include "include/errors.h"
+#include "unittest/unittest_main.h"
+#define ARG_UNIT_TEST "--unit_test"
 
 int main(int argc, char *argv[]) {
   /********************************/
@@ -30,6 +32,12 @@ int main(int argc, char *argv[]) {
   if (argc <= 1) {
     fprintf(stderr, "Error: zero arguments passed to compiler.\n");
     return ERR_INCORRECT_ARGUMENTS;
+  }
+  /***********************************/
+  /* Run Unit Tests for --unit_test  */
+  /***********************************/
+  if (strncmp(argv[1], ARG_UNIT_TEST, strlen(ARG_UNIT_TEST)) == 0) {
+    return unittest_main();
   }
   /********************************/
   /*   Compile each file in args  */

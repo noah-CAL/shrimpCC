@@ -14,15 +14,12 @@
 # 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+.SUFFIXES: 
 CC = gcc
 CFLAGS = -g -ggdb -Wall -Wextra
 
-SOURCES := $(wildcard src/*.c)
+SOURCES := $(shell find src -name "*.c")
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES)) # pattern, replacement, text
-DEPENDS := $(patsubst src/%.c,include/%.h,$(SOURCES))
-TESTS_OBJ := $(wildcard tests/*/*.s)
-TESTS_OUT := $(wildcard tests/*/*.out)
-TESTS_EXE := $(wildcard tests/*/*.exe)
 
 EXE := shrimpCC
 
@@ -30,13 +27,30 @@ help:
 	@echo "USAGE: make [all, test, clean, help]"
 	@echo
 
+######################
+#    Main Program    #
+######################
 all: $(OBJECTS)
 	$(CC) $^ -o $(EXE) $(CFLAGS)
 
-%.o: %.c include/%.h
-	$(CC) -c $< -o $@ $(CFLAGS)
+%.o: %.c
+	$(CC) -c $< -o $@ $(CFLAGS) $(RUN_TESTS) -Isrc/
 
-test: $(OBJECTS)
+#####################
+#    Unit Tests     #
+#####################
+unit-test: $(OBJECTS) all
+	@echo
+	@./$(EXE) --unit_test
+
+#####################
+# Integration Tests #
+#####################
+TESTS_OBJ := $(wildcard tests/*/*.s)
+TESTS_OUT := $(wildcard tests/*/*.out)
+TESTS_EXE := $(wildcard tests/*/*.exe)
+
+integ-test: $(OBJECTS)
 	@python3 tests/unittests.py
 
 .PHONY: all clean help test
