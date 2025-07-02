@@ -17,6 +17,7 @@
 .SUFFIXES: 
 CC = gcc
 CFLAGS = -g -ggdb -Wall -Wextra
+LDFLAGS = -lcunit
 
 SOURCES := $(shell find src -name "*.c")
 OBJECTS := $(patsubst %.c,%.o,$(SOURCES)) # pattern, replacement, text
@@ -31,10 +32,10 @@ help:
 #    Main Program    #
 ######################
 all: $(OBJECTS)
-	$(CC) $^ -o $(EXE) $(CFLAGS)
+	$(CC) $^ -o $(EXE) $(CFLAGS) $(LDFLAGS)
 
 %.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS) $(RUN_TESTS) -Isrc/
+	$(CC) -c $< -o $@ $(CFLAGS) $(RUN_TESTS) $(LDFLAGS) -Isrc/
 
 #####################
 #    Unit Tests     #

@@ -16,7 +16,20 @@ The following features are supported (based loosely off the above white paper):
 More to come soon!
 
 ## Building the Compiler
-The only requirements are `gcc` and `make`, and optionally `python3` for running the unit/integration test suite. 
+The only requirements are `gcc` and `make`, and optionally `CUnit` and `python3` for running the unit/integration test suite. 
+
+### Installing CUnit
+```
+>$ sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
+
+#include <CUnit.h>
+...
+```
+and link with `-lcunit` (which is already done in the Makefile)
+
+### Running unit tests (TODO: update)
+
+### Running Integration Tests
 
 ```
 >$ make
