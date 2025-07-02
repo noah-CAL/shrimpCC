@@ -16,6 +16,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+#ifndef __DSTESTS_H
+#define __DSTESTS_H
 #include <CUnit/CUnit.h>
 
 extern CU_TestInfo ll_tests[];
+
+#endif

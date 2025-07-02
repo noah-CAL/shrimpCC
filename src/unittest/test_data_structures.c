@@ -21,12 +21,34 @@
 #include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
 #include <CUnit/TestDB.h>
+#include <include/ds.h>
 
 void test_func1(void) { CU_ASSERT_TRUE(1); }
 void test_func2(void) { CU_ASSERT_TRUE(0); }
 
+void test_ll_create() {
+  list *ll = ll_create();
+  CU_ASSERT_NOT_EQUAL(ll, NULL);
+}
+
+void test_ll_null_peek() {
+  list *ll = ll_create();
+  CU_ASSERT_EQUAL(ll_peek(ll), NULL);
+  CU_ASSERT_EQUAL(ll_peek(ll), NULL);
+}
+
+void test_ll_append_peek() {
+  list *ll = ll_create();
+  int val = 20;
+  ll_append(ll, (void *)&val);
+  CU_ASSERT_EQUAL(ll_peek(ll), val);
+  CU_ASSERT_EQUAL(ll_peek(ll), val);
+  CU_ASSERT_EQUAL(ll_peek(ll), val);
+}
+
 CU_TestInfo ll_tests[] = {
-    {"test == true", test_func1},
-    {"test == false", test_func2},
+    {"test_ll_create", test_ll_create},
+    {"test_ll_null_peek", test_ll_null_peek},
+    {"test_ll_append_peek", test_ll_append_peek},
     CU_TEST_INFO_NULL,
 };

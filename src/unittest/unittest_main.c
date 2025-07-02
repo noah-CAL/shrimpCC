@@ -55,7 +55,7 @@ int unittest_main() {
   /*  Test Runner  */
   /*****************/
   CU_register_suites(suites);
-  CU_basic_set_mode(CU_BRM_NORMAL);
+  CU_basic_set_mode(CU_BRM_VERBOSE);
   CU_basic_run_tests();
 
   if (err != CUE_SUCCESS) goto cleanup;
@@ -63,11 +63,13 @@ int unittest_main() {
   /*****************/
   /* Print Results */
   /*****************/
+  unsigned int passed = CU_get_number_of_successes();
   unsigned int failed = CU_get_number_of_failures();
   if (failed >= 1) {
+    printf(GREEN "%d passed unit test(s)\n", passed);
     printf(RED "%d failed unit test(s)\n", failed);
   } else {
-    printf(GREEN "All Unit Tests Pass!\n");
+    printf(GREEN "All %d Unit Tests Pass!\n", passed);
   }
 
 cleanup:
