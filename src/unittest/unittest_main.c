@@ -20,16 +20,12 @@
 
 #include <CUnit/Basic.h>
 #include <CUnit/CUnit.h>
-#include <CUnit/TestDB.h>
 #include <stdio.h>
+
+#include "unittest/test_data_structures.h"
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
-
-void test_func1(void) { CU_ASSERT_TRUE(1); }
-void test_func2(void) { CU_ASSERT_TRUE(0); }
-
-int init(void) { return 0; }
 
 /* CUnit -- Unit test suite + test runner in C
  * https://cunit.sourceforge.net/doc/introduction.html#usage
@@ -45,36 +41,35 @@ int init(void) { return 0; }
 int unittest_main() {
   CU_ErrorCode err = CU_initialize_registry();
   if (err != CUE_SUCCESS) goto cleanup;
-
-  CU_pSuite pSuite = CU_add_suite("Suite_1", NULL, NULL);
-  if (pSuite == NULL) goto cleanup;
-
-  CU_TestInfo test_array1[] = {
-      {"test == true", test_func1},
-      {"test == false", test_func2},
-      CU_TEST_INFO_NULL,
-  };
-
+  /*****************/
+  /*  Test Suites  */
+  /*****************/
   // TODO(@self) current version of CUnit is legacy so additional
   // NULL setUp functions are required
   CU_SuiteInfo suites[] = {
-      {"suitename1", NULL, NULL, NULL, NULL, test_array1},
+      {"linked_list_tests", NULL, NULL, NULL, NULL, ll_tests},
       CU_SUITE_INFO_NULL,
   };
 
+  /*****************/
+  /*  Test Runner  */
+  /*****************/
   CU_register_suites(suites);
-
   CU_basic_set_mode(CU_BRM_NORMAL);
   CU_basic_run_tests();
 
   if (err != CUE_SUCCESS) goto cleanup;
 
+  /*****************/
+  /* Print Results */
+  /*****************/
   unsigned int failed = CU_get_number_of_failures();
   if (failed >= 1) {
     printf(RED "%d failed unit test(s)\n", failed);
   } else {
     printf(GREEN "All Unit Tests Pass!\n");
   }
+
 cleanup:
   if (err != CUE_SUCCESS) {
     printf("Error: %s\n", CU_get_error_msg());
