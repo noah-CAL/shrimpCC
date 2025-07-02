@@ -1,4 +1,6 @@
 /*
+ * shrimpCC: the tiny C compiler written in C!
+ *
  * Copyright (C) 2025 Noah Sedlik
  *
  * This program is free software: you can redistribute it and/or modify
@@ -13,30 +15,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
- * ds.c is for the data structures necessary for the compiler. Namely:
- * + Linked List
  */
-#include "include/ds.h"
+#ifndef __DS_H
+#define __DS_H
+#include <stdbool.h>
+/********************/
+/* FIFO Linked list */
+/********************/
+typedef struct ll_node list;
 
-#include <stdlib.h>
-/***************/
-/* Linked list */
-/***************/
-typedef struct ll_node ll_node;
+list *ll_create();
 
-// TODO(@self) limit tokens to 32 bytes?
-struct ll_node {
-  struct ll_node *next;
-  char data[32];
-};
-
-ll_node *ll_create() { return malloc(sizeof(ll_node)); }
-
-void *ll_pop(list *) { return NULL; }
-void *ll_peek(list *) { return NULL; }
-void ll_append(list *, void *val) { return; }
-void ll_destroy(list *) {
-  // TODO
-  return;
-}
+void ll_pop_front(list *, char buf[32]);
+void ll_peek(list *, char buf[32]);
+void ll_append(list *, char *val);
+void ll_destroy(list *);
+bool ll_is_empty(list *);
+#endif

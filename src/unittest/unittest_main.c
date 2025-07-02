@@ -22,7 +22,7 @@
 #include <CUnit/CUnit.h>
 #include <stdio.h>
 
-#include "unittest/test_data_structures.h"
+#include "unittest/test_list.h"
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -63,13 +63,13 @@ int unittest_main() {
   /*****************/
   /* Print Results */
   /*****************/
-  unsigned int passed = CU_get_number_of_successes();
-  unsigned int failed = CU_get_number_of_failures();
+  unsigned int total = CU_get_number_of_tests_run();
+  unsigned int failed = CU_get_number_of_tests_failed();
   if (failed >= 1) {
-    printf(GREEN "%d passed unit test(s)\n", passed);
+    printf(GREEN "%d passed unit test(s)\n", total - failed);
     printf(RED "%d failed unit test(s)\n", failed);
   } else {
-    printf(GREEN "All %d Unit Tests Pass!\n", passed);
+    printf(GREEN "All %d Unit Tests Pass!\n", total);
   }
 
 cleanup:
